@@ -7,30 +7,18 @@
 int main(int argc, char* argv[]) {
     if (argc != 1) return 1;
 
-    char *words[100];
-    char *newWords[100];
-    char buffer[6];
+    char **words = NULL;
+    char *line = NULL;
+    size_t size = 0;
     int idx = 0;
-    
-    while (fgets(buffer, 4096, stdin) != NULL) {
-        words[idx] = strndup(buffer, 4096);
-        // printf("%s", words[idx]);
+
+    while (getline(&line, &size, stdin) != -1) {
+        words = realloc(words, (idx + 1) * sizeof(char*));
+        words[idx] = strdup(line);
         idx++;
     }
 
-
-    /*
-    // TODO: Fix lowercase of words; currently seg faults
-    for (int i = 0; i < idx; i++) {
-        int j = 0;
-        while (words[i][j] != '\0') {
-            newWords[i][j] = tolower(words[i][j]);
-            j++;
-        }
-        printf("%s", newWords[i]);
-    }*/
-
-    int i = 0;
+    // Bubble sort may be inefficent but screw it
     for (int i = 0; i < idx; i++) {
         for (int j = 0; j < idx - 1; j++) {
             if (strcasecmp(words[j], words[j + 1]) > 0) {
