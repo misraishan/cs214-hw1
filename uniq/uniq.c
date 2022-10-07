@@ -10,18 +10,17 @@ struct linkedList {
     struct linkedList *prev;
 };
 
-// A function used to reverse the linked list
-// https://qnaplus.com/c-program-to-reverse-a-linked-list/ 
-void reverseLinkedList(struct linkedList **head) {
-  struct linkedList *new_head = NULL;
-  struct linkedList *tmp = NULL;
-  while(*head != NULL) {
-    tmp = *head;
-    *head = (*head)->next;
-    tmp->next = new_head;
-    new_head = tmp;
-  }
-  *head = new_head;
+int printListRev(struct linkedList *x)
+{
+    if(x == NULL)
+    {
+        printf("empty");
+        return 0;
+    }
+    else if(x->next != NULL)
+        printListRev(x->next);
+    printf("%d %s\n", x->value, x->key);
+    return 1;
 }
 
 int main(int argc, char** argv) {
@@ -49,14 +48,7 @@ int main(int argc, char** argv) {
     }
 
     // Reverse the linked list so that the output is in the correct order
-    reverseLinkedList(&head);
-
-    // Set current to new head and print the linked list
-    struct linkedList *current = head;
-    while (current != NULL) {
-        printf("%s %d\n", current->key, current->value);
-        current = current->next;
-    }
+    printListRev(head);
 
     exit(0);
 }
