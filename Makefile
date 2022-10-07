@@ -1,8 +1,8 @@
-OUTPUT=sort
+objects: factor/factor grep/grep monster/monster sort/sort uniq/uniq
+all: $(OBJECTS)
 CFLAGS=-g -Wall -Werror -fsanitize=address
-LFLAGS=-lm
 
-%: %.c %.h
+$(objects): %: %.c %.h
 	gcc $(CFLAGS) -o $@ $< $(LFLAGS)
 
 %: %.c
