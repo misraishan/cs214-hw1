@@ -64,7 +64,7 @@ int main(int argc, char** argv)
     {
         bool move = true;
         printBoard(boardx, boardy, plrx, plry, goalx, goaly, monx, mony);
-        if(scanf(" %c", &cmd)==EOF)
+        if(scanf("%c", &cmd)==EOF)
             break;
         if(plry+1 < boardy && (cmd == 'N' || cmd == 'n'))
             plry = plry+1;
