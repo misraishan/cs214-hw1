@@ -57,6 +57,26 @@ int main(int argc, char** argv)
         printf("\nMONSTER INITIALIZED AT GOAL, BAD INPUT: ending game...");
         exit(EXIT_SUCCESS);
     }
+
+    if(goalx >= boardx || goaly >= boardy || plrx >= boardx || plry >= boardy || monx >= boardx || mony >= boardy || goalx < 0 || goaly < 0 || plrx < 0 || plry < 0 || monx < 0 || mony < 0 || boardx < 0 || boardy < 0)
+{
+    printf("\nEITHER A GAME COMPONENT WAS INITIALIZED OUT OF BOUNDS OR YOU USED NEGATIVE VALES TO START THE GAME, BAD INPUT: ending game...");
+    exit(EXIT_SUCCESS);
+}
+
+//is player at goal
+            if(plrx == goalx && plry == goaly)
+            {
+                printf("player wins!");
+                exit(EXIT_SUCCESS);
+            }
+
+            //is player at monster?
+            if(plrx == monx && plry == mony)
+            {
+                printf("monster wins!");
+                exit(EXIT_SUCCESS);
+            }
     
     //begin game, set moves
     char cmd;
@@ -64,7 +84,7 @@ int main(int argc, char** argv)
     {
         bool move = true;
         printBoard(boardx, boardy, plrx, plry, goalx, goaly, monx, mony);
-        if(scanf("%c", &cmd)==EOF)
+        if(scanf(" %c", &cmd)==EOF)
             break;
         if(plry+1 < boardy && (cmd == 'N' || cmd == 'n'))
             plry = plry+1;
